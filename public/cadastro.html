@@ -165,11 +165,16 @@
 
       }
     }
+    var venda=0;
+    if(generoVar=="3"|| generoVar=="4"  && generoVar >=100){
+      venda *1.225;
+    }else if(generoVar =="2"|| generoVar=="3" && generoVar <=50){
+      venda *1.25;
 
-    if()
+    }else if(generoVar =="2"|| generoVar=="3" && generoVar <=50){
+      venda *1.275;
 
-
-    
+    }
     /*else {
       setInterval(sumirMensagem, 5000);
     }*/
