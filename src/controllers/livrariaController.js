@@ -33,21 +33,25 @@ function cadastrar(req, res) {
   var compra = req.body.compraServer;
   var venda = req.body.vendaServer;
   var quantidade = req.body.quantServer;
-  var fkGenero = req.body.idEmpresaVincularServer;
+  var fkGenero = req.body.generoServer; // generoServer=> veio do html
 
-
-  if (nome == undefined) {
+if (titulo == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    }
+ else if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (compra == undefined) {
         res.status(400).send("Seu compra está undefined!");
     } else if (venda == undefined) {
         res.status(400).send("Sua venda está undefined!");
     } else if (quantidade == undefined) {
-        res.status(400).send("Sua empresa a vincular está undefined!");
+        res.status(400).send("A quantidade está undefined!");
+    } else if (fkGenero == undefined) {
+        res.status(400).send("O  genero do livro está undefined!");
     } else {
 
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, compra, venda, quantidade)
+        // Passe os valores como parâmetro e vá para o arquivo livrariaModel.js
+        livrariaModel.cadastrar(titulo, nome, compra, venda, quantidade, fkGenero)
             .then(
                 function (resultado) {
                     res.json(resultado);

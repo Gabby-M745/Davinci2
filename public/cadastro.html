@@ -153,18 +153,14 @@
     var validaCerto=  true;
     var valida= ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','à', 'è', 'ì', 'ò', 'ù','à', 'è', 'ì', 'ò', 'ù', 'â', 'ê', 'î', 'ô', 'û','ã', 'õ', 'ñ' ,'À', 'È', 'Ì', 'Ò', 'Ù','À', 'È', 'Ì', 'Ò', 'Ù', 'Â', 'Ê', 'Î', 'Ô', 'Û','Ã', 'Õ', 'Ñ' ];
 
-    for(var i=0; i <=nomeVar.length; i++){
-      if(valida !== nomeVar[i]){
+ for (var i = 0; i < nomeVar.length; i++) {
+    if (!valida.includes(nomeVar[i])) {
         cardErro.style.display = "block";
-        mensagem_erro.innerHTML =
-        "(Atenção! não se está permitido números e caracteres especiais )";
+        mensagem_erro.innerHTML = "(Atenção! não se está permitido números e caracteres especiais )";
         finalizarAguardar();
         return false;
-      } else{
-        setInterval(sumirMensagem, 5000);
-
-      }
     }
+}
     var venda=0;
     if(generoVar=="3"|| generoVar=="4"  && generoVar >=100){
       venda *1.225;
@@ -193,7 +189,7 @@
      }*/
 
     // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
+    fetch("/livrarias/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -227,7 +223,7 @@
             "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
-            window.location = "login.html";           // VOLTAR
+            window.location = "simulador.html";           // VOLTAR
           }, "2000");
 
           limparFormulario();
