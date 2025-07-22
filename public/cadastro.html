@@ -125,9 +125,9 @@
     // var tituloVar = titulo.value;
     var tituloVar = titulo_input.value;
     var nomeVar = nome_input.value;
-    var compraVar = pre_compra.value;
-    var vendaVar = pre_venda.value;
-    var quantVar = quantidade_input.value;
+    var compraVar = Number(pre_compra.value);
+    var vendaVar = Number(pre_venda.value);
+    var quantVar = Number(quantidade_input.value);
     var generoVar = genero_input.value;
     // var /**/
 
@@ -150,8 +150,8 @@
       return false;
     } 
 
-    var validaCerto=  true;
-    var valida= ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','à', 'è', 'ì', 'ò', 'ù','à', 'è', 'ì', 'ò', 'ù', 'â', 'ê', 'î', 'ô', 'û','ã', 'õ', 'ñ' ,'À', 'È', 'Ì', 'Ò', 'Ù','À', 'È', 'Ì', 'Ò', 'Ù', 'Â', 'Ê', 'Î', 'Ô', 'Û','Ã', 'Õ', 'Ñ' ];
+    //var validaCerto=  true;
+    var valida= ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z','à', 'è', 'ì', 'ò', 'ù','à', 'è', 'ì', 'ò', 'ù', 'â', 'ê', 'î', 'ô', 'û','ã', 'õ', 'ñ' ,'À', 'È', 'Ì', 'Ò', 'Ù','À', 'È', 'Ì', 'Ò', 'Ù', 'Â', 'Ê', 'Î', 'Ô', 'Û','Ã', 'Õ', 'Ñ', " " ]; //considerar espaço, dps de situações de barramento pela mensagem, ocorrido por haver espaço entreo último nome e o primeiro, considerando assim na validação o espaço.
 
  for (var i = 0; i < nomeVar.length; i++) {
     if (!valida.includes(nomeVar[i])) {
@@ -162,32 +162,19 @@
     }
 }
     var venda=0;
-    if(generoVar=="3"|| generoVar=="4"  && generoVar >=100){
-      venda *1.225;
-    }else if(generoVar =="2"|| generoVar=="3" && generoVar <=50){
-      venda *1.25;
+    if((generoVar=="3"|| generoVar=="4")  && compraVar >=100){//ter parenteses, imaginar uma função e suas regras, os símbolos e suas prioridades.
+      venda=compraVar *1.225;
+    }else if((generoVar =="2"|| generoVar=="3") && compraVar <=50){
+      venda=compraVar *1.25;
 
-    }else if(generoVar =="2"|| generoVar=="3" && generoVar <=50){
-      venda *1.275;
+    }else if((generoVar =="1" && generoVar > 50) && compraVar < 100){
+      venda= compraVar *1.275;
 
+    }else{//casos que ficaram de fora das regras do enunciado.
+   venda = compraVar * 1.1;//10%
+  alert(`Valor fixo em aplicação, de: 10% <br> quando não se está entre o que é ditado nas regras.`);
     }
-    /*else {
-      setInterval(sumirMensagem, 5000);
-    }*/
-
-    // Verificando se o código de ativação é de alguma empresa cadastrada             //VOLTAR
-    /* for (let i = 0; i < listaCadastraLivro.length; i++) {
-       if (listaCadastraLivro[i].codigo_ativacao == tituloVar) {
-         /*= listaCadastraLivro[i].id
-         console.log("Código de ativação válido.");
-         break;
-       } else {
-         cardErro.style.display = "block";
-         mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-         finalizarAguardar();
-       }
-     }*/
-
+    
     // Enviando o valor da nova input
     fetch("/livrarias/cadastrar", {
       method: "POST",
