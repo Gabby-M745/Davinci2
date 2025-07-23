@@ -110,10 +110,11 @@ function exibirLivros() {
                     <h1>${livro.titulo}</h1>
                 </div>
                 <div class="desc-livro">
-                    <p><strong>Autor:</strong> ${livro.autor}</p>
-                    <p><strong>Gênero:</strong> ${livro.fkGenero}</p>
-                    <p><strong>Preço Compra:</strong> R$ ${Number(livro.compraPr).toFixed(2)}</p>
-                    <p><strong>Preço Venda:</strong> R$ ${Number(livro.vendaPr).toFixed(2)}</p>
+                    <p><b>Autor:</b> ${livro.autor}</p>
+                    <p><b>Gênero:</b> ${livro.fkGenero}</p>
+                    <p><b>Preço Compra:</b> R$ ${Number(livro.compraPr).toFixed(2)}</p>
+                    <p><b>Preço Venda:</b> R$ ${Number(livro.vendaPr).toFixed(2)}</p>
+                    <p><b>Total: R$ ${(livro.vendaPr * livro.quantidade).toFixed(2)}</b></p>
                 </div>
             </div>
         `;//nome igual ao campo que está na tabela de banco de dados

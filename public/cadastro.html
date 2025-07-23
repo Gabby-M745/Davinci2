@@ -67,10 +67,10 @@
             <span>Preço de compra:</span>
             <input id="pre_compra" type="text" placeholder="0,00" />
           </div>
-          <div class="campo">
+         <!-- <div class="campo">
             <span>Preço de venda:</span>
             <input id="pre_venda" type="text" placeholder="0,00" />
-          </div>
+          </div>--> 
           <div class="campo">
             <span>Quantidade:</span>
             <input id="quantidade_input" type="text" placeholder="0" />
@@ -126,7 +126,7 @@
     var tituloVar = titulo_input.value;
     var nomeVar = nome_input.value;
     var compraVar = Number(pre_compra.value);
-    var vendaVar = Number(pre_venda.value);
+   // var vendaVar = Number(pre_venda.value);
     var quantVar = Number(quantidade_input.value);
     var generoVar = genero_input.value;
     // var /**/
@@ -138,7 +138,7 @@
       tituloVar == "" ||
       nomeVar == "" ||
       compraVar == "" ||
-      vendaVar == "" ||
+     // vendaVar == "" ||
       quantVar == ""||
       generoVar ==""
     ) {
@@ -167,7 +167,7 @@
     }else if((generoVar =="2"|| generoVar=="3") && compraVar <=50){
       venda=compraVar *1.25;
 
-    }else if((generoVar =="1" && generoVar > 50) && compraVar < 100){
+    }else if((generoVar =="1" && compraVar > 50) && compraVar < 100){
       venda= compraVar *1.275;
 
     }else{//casos que ficaram de fora das regras do enunciado.
@@ -193,7 +193,7 @@
         tituloServer: tituloVar,
         nomeServer: nomeVar,
         compraServer: compraVar,
-        vendaServer: vendaVar,
+        vendaServer: venda, //variavel acumula e calculada
         quantServer: quantVar,
         generoServer: generoVar
 
