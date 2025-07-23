@@ -79,22 +79,7 @@ function listar() {
     console.log(`#ERRO: ${erro}`);
   });
 }
-/*
-function listar() {//atnção nas orden das funções, listar primeiro e exibir depois pela função
-    fetch("/livrarias/listar", {
-        method: "GET",//sempre get
-    })
-    .then(function (resposta) {//igual
-        return resposta.json();//retornar
-    }) .then(function (livrarias) {//2x then
-        listaCadastraLivro = livrarias;//rota
-        console.log("listaCadastraLivro:", listaCadastraLivro);//chamar vetor
-        exibirLivros();
-    })
-    .catch(function (erro) {//manter
-        console.log(`#ERRO: ${erro}`);
-    });
-}*/
+
 function exibirLivros() {
     const container = document.getElementById("livro_container");//aqui onde será puxado e exibido / alteração caso feite, ser atualizado em conjunto com a parte de cima onde está o id!
     container.innerHTML = ""; // limpa antes de exibir novamente
