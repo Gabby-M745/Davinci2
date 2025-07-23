@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="listar()"> <!--função que ativa automaticamente-->
 
     <!--header inicio-->
     <div class="header">
@@ -39,32 +39,14 @@
 
 
     <!-- simulador inicio -->
-    <div class="simulador">
-        <div class="container">
-            <h2>Simulador</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-
+   <div class="simulador">
+<div id="exibir_livro" class="container">
+ 
+             <h2>Exibição de registro:</h2>
+          <div id="livro_container" class="lista_livros"></div><!--exibir abaixo-->
         </div>
-    </div>
+        </div>
+
     <!-- simulador fim -->
 
     <!--footer inicio-->
@@ -80,3 +62,87 @@
 </body>
 
 </html>
+<script>
+var listaCadastraLivro = [];
+function listar() {
+  fetch("/livrarias/listar", {
+    method: "GET",
+  })
+  .then(function (resposta) {
+    resposta.json().then(function (livrarias) {
+      listaCadastraLivro = livrarias; // salva no vetor global
+      console.log("listaCadastraLivro:", listaCadastraLivro);
+      exibirLivros(); // chama a função que exibe os livros
+    });
+  })
+  .catch(function (erro) {
+    console.log(`#ERRO: ${erro}`);
+  });
+}
+/*
+function listar() {//atnção nas orden das funções, listar primeiro e exibir depois pela função
+    fetch("/livrarias/listar", {
+        method: "GET",//sempre get
+    })
+    .then(function (resposta) {//igual
+        return resposta.json();//retornar
+    }) .then(function (livrarias) {//2x then
+        listaCadastraLivro = livrarias;//rota
+        console.log("listaCadastraLivro:", listaCadastraLivro);//chamar vetor
+        exibirLivros();
+    })
+    .catch(function (erro) {//manter
+        console.log(`#ERRO: ${erro}`);
+    });
+}*/
+function exibirLivros() {
+    const container = document.getElementById("livro_container");//aqui onde será puxado e exibido / alteração caso feite, ser atualizado em conjunto com a parte de cima onde está o id!
+    container.innerHTML = ""; // limpa antes de exibir novamente
+
+    listaCadastraLivro.forEach(livro => {
+      console.log(livro)
+   /* console.log("listaCadastraLivro")
+           console.log(listaCadastraLivro[0])
+*/
+        container.innerHTML += `
+            <div class="card-livro">
+                <div class="title-livro">
+                    <h1>${livro.titulo}</h1>
+                </div>
+                <div class="desc-livro">
+                    <p><strong>Autor:</strong> ${livro.autor}</p>
+                    <p><strong>Gênero:</strong> ${livro.fkGenero}</p>
+                    <p><strong>Preço Compra:</strong> R$ ${Number(livro.compraPr).toFixed(2)}</p>
+                    <p><strong>Preço Venda:</strong> R$ ${Number(livro.vendaPr).toFixed(2)}</p>
+                </div>
+            </div>
+        `;//nome igual ao campo que está na tabela de banco de dados
+    });//obs: não vem automaticamente o valor em número da funcao cadastro para cá, converter em número aqui também +6
+    //semelhante ao mural.html
+}
+
+
+/*function listar() {
+    fetch("/livrarias/listar", {//rotas? fetch("/empresas/listar", {//rotas ?                                 
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((livrarias) => {
+          livrarias.forEach((livro) => {/*livro: campo da tabela*/
+           /* listaCadastraLivro.push(livro);
+
+            console.log("listaCadastraLivro")
+           console.log(listaCadastraLivro[0])
+
+           // console.log(listaCadastraLivro[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }*/
+
+//listar();
+//exibirLivros();
+</script>

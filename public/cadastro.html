@@ -233,12 +233,14 @@
       method: "GET",
     })
       .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaCadastraLivro.push(empresa);
+        resposta.json().then((livrarias) => {
+          livrarias.forEach((livro) => {/*livro: campo da tabela*/
+            listaCadastraLivro.push(livro);
 
             console.log("listaCadastraLivro")
-            console.log(listaCadastraLivro[0].codigo_ativacao)
+           console.log(listaCadastraLivro[0])
+
+           // console.log(listaCadastraLivro[0].codigo_ativacao)
           });
         });
       })

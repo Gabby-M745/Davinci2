@@ -305,13 +305,19 @@ input {
 /* SIMULADOR */
 
 .simulador {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .simulador .container {
   flex-direction: column;
   overflow: scroll; 
-  height: var(--tamanho-simulador);
+  background-color: #ffffff;/*cor de fundo*/
+  padding: 20px;/*espaçamento interno*/
+  height: var(--tamanho-simulador);/**/ 
+}
+.container {
+  scrollbar-color: #2980b9 #c4c4c4; /* cor da barra e fundo  */
+  /*scrollbar-color: #2980b9 <=cor da barra/ #c53131 <=cor de fundo  */
 }
 
 /* ALERTA */
