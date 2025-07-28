@@ -1,6 +1,5 @@
 create database livraria;
 use livraria;
-
 create table genero(idGenero int primary key auto_increment,
 nome varchar(45) not null 
 /*constraint nomecheck check (nome in('fantasia','poesia','horror','romance'))*/
@@ -17,9 +16,11 @@ foreign key (fkGenero) references genero(idGenero)/*muitos livros podem pertence
 );
 
 
-insert into genero values /*(nome)  */
+insert into genero (nome)values /*(nome)  */
 ('fantasia'),
 ('poesia'),
 ('horror'),
 ('romance');
-
+ select*from livro;
+ select*from genero;
+-- drop database livraria;

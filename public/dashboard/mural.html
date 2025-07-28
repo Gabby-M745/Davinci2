@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
+<!--alt+z=> quebra  de linha, visualização-->
 <head>
     <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
     <meta charset="UTF-8">
@@ -20,7 +20,8 @@
 </head>
 
 <!--<body onload="validarSessao(), atualizarFeed()" style="background-color: #161618;">-->
-
+<!--<body onload="validarSessao()=> valida se o usuário está logado-->
+    <!-- atualizarFeed()=>são as postagens que existem até o momento e exibem na tela, é feito o resate no banco de dados e assim fica transparente para o usuario-->
     <div class="janela">
 
 
@@ -202,7 +203,7 @@
                         var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
 
-
+// após criar os elementos html acima, é inserido o conteúdo, como a seguir:
                         spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
                         spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
                         spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
@@ -210,6 +211,7 @@
                         btnEditar.innerHTML = "Editar";
                         btnDeletar.innerHTML = "Deletar";
 
+                        //aqui então adicionando uma classe, css 
                         divPublicacao.className = "publicacao";
                         spanTitulo.id = "inputNumero" + publicacao.idAviso;
                         spanNome.className = "publicacao-nome";
@@ -226,6 +228,7 @@
                         btnDeletar.id = "btnDeletar" + publicacao.idAviso;
                         btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
 
+                        //neste momento, é agrupado a um post o html, css,a chamada divPublicacao, dessa forma estando organizado os elementos , é atribuido a variável feed que é no início é oque foi atribuido como a divfeed_container, exibindo no mural.html , ver o for onde há
                         divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);
                         divPublicacao.appendChild(spanTitulo);
